@@ -1,0 +1,62 @@
+<!DOCTYPE html>
+<html>
+<head>
+
+<script src="https://ajax.googleapis.com/ajax/libs/jquery/2.2.2/jquery.min.js"></script>
+<!-- Latest compiled and minified CSS -->
+<link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.5/css/bootstrap.min.css">
+
+<!-- Optional theme -->
+<link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.5/css/bootstrap-theme.min.css">
+
+<!-- Latest compiled and minified JavaScript -->
+<script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.5/js/bootstrap.min.js">
+</script>
+
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<script src="familysearch-javascript-sdk.js"></script>
+</head>
+<body>
+<a id="run" href="#">Run</a>
+<div id="output" />
+
+<script>
+/* For more detailed instructions go to: https://familysearch.org/developers/docs/guides/getting-started
+
+1. Paste App Key in line 13
+2. Paste Redirect URI in line 14
+3. Click "Update" above
+4. In the panel to the right click text "Run" ---------------------->
+5. When prompted, login with your SANBOX username and password
+6. You will see an Access Token in the right panel
+
+*/
+
+
+var client = new FamilySearch({
+  app_key: 'a02j000000FebAOAAZ',
+    auth_callback: 'localhost:8000',
+  environment: 'sandbox',
+  http_function: $.ajax,
+  deferred_function: $.Deferred
+});
+
+function run() {
+	alert("runnngi")
+  client.getAccessToken().then(function (response) {
+      output('Access token', response);
+      // the access token is cached in the FamilySearch object
+  });
+}
+
+
+                                     
+$('#run').click(run);
+
+function output(label, data) {
+    $('#output').append(label ? '<h3>'+label+'<h3>' : '<hr>');
+    $('#output').append(data);
+}	
+</script>
+</body>
+</html>
